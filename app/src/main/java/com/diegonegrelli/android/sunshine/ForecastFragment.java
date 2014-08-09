@@ -122,10 +122,11 @@ public class ForecastFragment extends Fragment {
 
             HttpURLConnection urlConnection = null;
             BufferedReader reader = null;
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
             String forecastJsonStr = null;
             String format = "json";
-            String units = "metric";
+            String units = prefs.getString(getString(R.string.pref_unit_key), getString(R.string.pref_unit_default));
             int numDays = 7;
 
             try {
