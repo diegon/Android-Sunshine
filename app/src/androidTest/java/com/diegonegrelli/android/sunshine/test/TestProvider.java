@@ -82,7 +82,7 @@ public class TestProvider extends AndroidTestCase {
                 LocationEntry.COLUMN_COORD_LONG
         };
 
-        Cursor locationCursor = mContext.getContentResolver().query(LocationEntry.CONTENT_URI, null, null, null, null, null);
+        Cursor locationCursor = mContext.getContentResolver().query(LocationEntry.CONTENT_URI, null, null, null, null);
 
         if(locationCursor.moveToFirst()) {
             String location = locationCursor.getString(locationCursor.getColumnIndex(LocationEntry.COLUMN_LOCATION_SETTING));
