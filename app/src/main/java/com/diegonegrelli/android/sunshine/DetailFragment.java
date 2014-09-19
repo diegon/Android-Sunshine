@@ -171,7 +171,8 @@ public class DetailFragment  extends Fragment implements LoaderManager.LoaderCal
         if (!data.moveToFirst()) { return; }
 
         int weatherId = data.getInt(data.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_WEATHER_ID));
-        mIconView.setImageResource(R.drawable.ic_launcher);
+        int imageId = Utility.getArtResourceForWeatherCondition(weatherId);
+        mIconView.setImageResource(imageId);
 
         String dateString = Utility.formatDate(
                 data.getString(data.getColumnIndex(WeatherContract.WeatherEntry.COLUMN_DATETEXT)));
