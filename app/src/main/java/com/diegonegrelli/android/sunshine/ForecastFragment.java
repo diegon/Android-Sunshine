@@ -1,5 +1,8 @@
 package com.diegonegrelli.android.sunshine;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -43,6 +46,8 @@ import java.util.List;
 import com.diegonegrelli.android.sunshine.data.WeatherContract;
 import com.diegonegrelli.android.sunshine.data.WeatherContract.LocationEntry;
 import com.diegonegrelli.android.sunshine.data.WeatherContract.WeatherEntry;
+import com.diegonegrelli.android.sunshine.service.SunshineService;
+import com.diegonegrelli.android.sunshine.sync.SunshineSyncAdapter;
 
 public class ForecastFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -189,8 +194,19 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
     }
 
     private void updateWeather() {
-        FetchWeatherTask weatherTask = new FetchWeatherTask(getActivity());
-        weatherTask.execute(Utility.getPreferredLocation(getActivity()));
+        //FetchWeatherTask weatherTask = new FetchWeatherTask(getActivity());
+        //weatherTask.execute(Utility.getPreferredLocation(getActivity()));
+
+        /*
+        Intent alarmIntent = new Intent(getActivity(), SunshineService.AlarmReceiver.class);
+        alarmIntent.putExtra(SunshineService.LOCATION_QUERY_EXTRA, Utility.getPreferredLocation(getActivity()));
+
+        PendingIntent pi = PendingIntent.getBroadcast(getActivity(), 0, alarmIntent, PendingIntent.FLAG_ONE_SHOT);
+        AlarmManager am = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+        am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+5000, pi);
+        */
+
+        SunshineSyncAdapter.syncImmediately(getActivity());
     }
 
     @Override

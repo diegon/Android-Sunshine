@@ -18,6 +18,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.diegonegrelli.android.sunshine.sync.SunshineSyncAdapter;
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,6 +40,8 @@ public class MainActivity extends ActionBarActivity {
                     .add(R.id.container, new ForecastFragment())
                     .commit();
         }
+
+        SunshineSyncAdapter.initializeSyncAdapter(this);
     }
 
     @Override
@@ -92,7 +96,7 @@ public class MainActivity extends ActionBarActivity {
                 onPreferredLocationInMap();
                 return true;
             default:
-                return true;
+                return super.onOptionsItemSelected(item);
         }
 
     }
